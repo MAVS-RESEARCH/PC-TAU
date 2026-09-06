@@ -866,6 +866,54 @@ None from final review. Rejected: reusing production planner for eligibility (fi
 
 ---
 
+## §A1 — Post-measurement falsification-only audit (pre-Phase-4 gate; 2026-09-06/07 UTC)
+
+### A1.1 Scope (audit brief, not a WorkPlan phase)
+
+Resolve two post-Phase-3 ambiguities before any claim seal: (i) whether the 135-task uniform finite-substitution geometry is source-recovered or template-supplied; (ii) whether the 5,436 trajectories are learned-agent evidence. Falsification-only: weaken/invalidate/narrow allowed; no post-hoc improvement; sealed run immutable; new work only as attached audit artifacts. Verdicts: SG-B, LM-C with LM-B handling, Interpretation B, AUTHORIZATION B.
+
+### A1.2 Files made (hashes sha256-12, all new under results/pctau-20260906-672227c/audit_prephase4/)
+
+- source_grounding_all_tasks.parquet 1f4c5262cc27 — 135 rows, per-repair A/B classes + full justification fields + checker witness counts.
+- source_mechanism_clusters.json 57b7daa9cd0a — templates 1, families 3, tool instances 5, policy-for-necessity 1, target classes 10, mechanisms 3.
+- repair_provenance_summary.json a6c97333ae95 — qR 135B, qE 135A, qA 135B-lim, overall 135 SG-B-contributing.
+- partial_origin_audit.json f927b85dec48 — airline:19, retail:19/39/59/99; residue-19 rule holds 5/5; DELIBERATE_HARNESS_INJECTION.
+- model_protocol_audit.json c47b42779115 — IDs named, inference required, probes unauthorized, deviation true, harness first commit a05e874.
+- phase3_model_evidence_verdict.json 232ca81b07b3 — LM-C + LM-B handling, 5,436 preserved as controls, learned claim unmeasured.
+- exact_result_interpretation.json 853fd0c1be22 — Interpretation B, 135 tasks vs 3 mechanisms vs 1 template, predetermined true with consistency box.
+- POST_MEASUREMENT_AUDIT.md 333f03d1f254 — 20 required sections + claim matrix (14 rows).
+- authorization_decision.json f06d674cac5a — SG-B, LM-C, AUTHORIZATION B, 11 predicate locks (learned-agent pair false), follow-on pctau-20260906-672227c-llm1 specified unexecuted.
+- scripts/audit_prephase4.py (AUD-01..22) + tests/audit/test_prephase4.py + __init__.py (AUDT-01..08).
+
+### A1.3 Code + how coded (read-only over sealed evidence, deterministic, canonical JSON, no live calls)
+
+- scripts/audit_prephase4.py: snapshot_hashes (git ls-files over results/configs/preregistration/src/scripts/schemas) → target_class keyword clustering → classify_repairs (TOOL_DOCS locators airline 371/321/532 retail 333/141/732 + policy.md; R six-prohibition verification; qA limitation flag; witnesses recomputed with checker, never exact values) → clusters/summary/partial/model/verdict/interpretation/decision writers; exact signatures read solely for uniformity reporting. No writes outside audit_prephase4/.
+- Key judgments (pre-Phase-3 evidence only): qE Class A (native read-only lookups); qR Class B (native calculate + frozen representation rule); qA Class B with qlim_delegation_reading (native handoff + frozen delegation rule; upstream termination semantics disclosed; strict-native falsification condition stated). PARTIALs control-induced by residue rule (not natural ambiguity). Model deviation proven by frozen files + history + zero live-call markers.
+- tests/audit/test_prephase4.py: 9-artifact completeness + verdict consistency (SG-B/B/LM-C/Interpretation-B/DELIBERATE), 20-section + matrix structure, sealed-run immutability (only new audit paths plus one adjudicated harness fix; zero scientific-path modifications; manifest still 31).
+
+### A1.4 console.log tracing (30 markers; every print preceded by `# console.log <ID>:`)
+
+scripts/audit_prephase4.py 22 (AUD-01..22 at lines 28,56,62,69,83,90,118,162,169,174,203,217,236,273,286,308,344,365,401,445,458,464); tests/audit/test_prephase4.py 8 (AUDT-01..08 at lines 12,36,56,62,71,77,91,110). Full list in tool output above; reproduce with Select-String console.log. Total 30.
+
+### A1.5 Models / benchmarks (this audit)
+
+Training none; inference none. The audit performs no model evaluation and creates no trajectories. It reclassifies existing ones. Anti-overfitting preserved: classification blind to exact/agent outcomes (code-separated reporting-only reads); population/selection untouched; predicates stay false until Phase 4 evidence flips.
+
+### A1.6 Verification + stress evidence
+
+- pytest: 39 passed (10 + 15 + 11 + 3 audit).
+- Sealed-run integrity: pre-audit worktree clean; post-audit git status contains only the 9 audit files + audit script + audit tests (+ ledger); manifest unchanged at 31 entries; no file under contract/exact/agents/pilot/configs/preregistration/src/scripts/schemas modified except the adjudicated harness fix below.
+- Adjudicated event: the new immutability test initially failed on ` M tests/phase3/test_planner_first_use.py` (time-bound history assertion updated for the committed Phase-3 history, same class as §P2/P3 harness evolutions). Adjudication: test-harness correction only, science untouched; audit test now pins the exact allowed set (new audit paths + that one file + ledger) and asserts zero scientific-path modifications. The machinery demonstrably catches post-audit edits.
+- Full-suite green after adjudication: 39 passed.
+
+### A1.7 Deviations
+
+None from the audit brief (all 9 artifacts, 20 sections, matrix, labels, directory placement, no-seal-mutation all as specified). Harness fixes: P3T04 history pin (eff5ba5) + audit-test exact-scope + this §A1 entry. No science change.
+
+**WorkPlan-follows: N/A (falsification-only audit outside the 4-phase plan; constraints honored: firewall intact, no silent rewrites, ledger-disciplined). Next: Phase 4 under AUTHORIZATION B.**
+
+_Status: COMPLETE (audit delivered; authorization B issued). Commit audit: AUTHORIZATION-B pctau-20260906-672227c (pending push, see log)._
+
 ## Commit/push log (user requirement: push after each phase without being asked)
 
 | Date (UTC) | Commit | Gate | Remote |
@@ -876,6 +924,7 @@ None from final review. Rejected: reusing production planner for eligibility (fi
 | 2026-09-06 | `19004b7` phase1: PREREGISTERED pctau-20260906-672227c pushed `b378cb7..19004b7 main->main` | PREREGISTERED | `origin/main` |
 | 2026-09-06 | `eff5ba5` phase2: CONTRACT_SEALED pctau-20260906-672227c pushed `5bb670c..eff5ba5 main->main` | CONTRACT_SEALED | `origin/main` |
 | 2026-09-06 | `a05e874` phase3: MEASURED pctau-20260906-672227c pushed `8f23ab2..a05e874 main->main` | MEASURED | `origin/main` |
+| 2026-09-06 | audit: AUTHORIZATION-B pctau-20260906-672227c (pending push) | AUDIT-B | `origin/main` |
 | — | Phase 2 commit (pending) | CONTRACT_SEALED/STOP | — |
 | — | Phase 3 commit (pending) | MEASURED | — |
 | — | Phase 4 commit (pending) | SEALED/INVALID | — |
