@@ -1,0 +1,1 @@
+{"frozen":true,"rules":["all verifier verdicts agree -> IDENTIFIED","any authority disagreement -> PARTIAL sidecar","missing target or provenance -> INVALID with failure card","PARTIAL never backfills primary; primary needs IDENTIFIED core >=40 across >=2 domains"],"run_id":"pctau-20260906-672227c","version":"1.0-phase2"}
