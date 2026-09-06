@@ -105,6 +105,32 @@ None from review. Rejected: 5th/6th phase split (kept 4); symlink/copy freeze fi
 
 **WorkPlan-follows: YES.** Implements exactly the 10-fix patch list; no gate claimed; next is Phase 1 per patched WorkPlan Appendix C.
 
+## §R2 — Final 4 fixes into WorkPlan.md (2026-09-06, UTC)
+
+### R2.1 Scope
+
+Apply the 4 final review issues without redesign: (Fix 11) production planner must not decide Phase-2 eligibility — tiny separate unrestricted reachability checker `Viable(q)` with no freeze/cost/`Δ_R`/`K_Pi` knowledge, planner first used in Phase 3; (Fix 12) run-level PARTIAL eliminated — `CONTRACT_SEALED` whenever the IDENTIFIED primary core passes, task PARTIALs in sealed sidecar, else STOP; (Fix 13) all claim predicates start `false`, flip to `true` only on machine-checkable evidence predicates, permanent nonclaims stay `false`; (Fix 14) explicit trajectory persistence — immutable `pc-tau-<run-id>-sealed.tar.zst` release bundle + committed `releases/<run-id>.json` pointer, `--reproduce` verifies bundle and recomputes. No scientific code/freezes/model runs in this entry.
+
+### R2.2 Files changed + how coded
+
+- `WorkPlan.md` (16 edits): Status + §0.2 phase chain (Fix 12) + §0.3 pts 1/7 (Fix 11 checker, Fix 13 all-false) + §0.5 gate (Fix 11) + §0.6 layout (`reachability.py`, `partial_tasks.jsonl` sidecar, `releases/<run-id>.json`) + runtime/persistence (Fix 14 bundle) + traceability/stale-rules/verification strings + Phase 1 (Fix 11 pilot checker, Fix 13 defaults, planner-import ban) + Phase 2 header/files (`CONTRACT_SEALED` or `STOP`, sidecar, no run PARTIAL) + `reachability.py` module spec + checker-only predicate + tests (`test_reachability_isolated`, `test_no_production_planner_in_phase2`, `test_sealed_with_partials`, blind-checker) + §2.4 sidecar language + G2 rewrite (primary core ≥40, PARTIALs never backfill, Phase 3 authorized with PARTIALs present) + Phase 3 scope/files/code/tests/gates (planner first use, primary-core-only, bundle archiving, `test_planner_first_use`) + Phase 4 files/boundary/layers/corruptions/claims-example (all-false + evidence predicates e.g. `finite_substitution_authorized=[∃ i∈N: 0<Δ_R<∞]`) / seal-bundle-pointer / tests (evidence-flip + bundle-tamper + replay-from-bundle) / §4.4/G4/DoD/stops (checker/sidecar/evidence/bundle checks) + Appendix A (evidence predicates) + Appendix B (Fix 11–14 index) + Appendix C (G2 note, seal-bundle build, bundle-verified reproduce).
+- Method: sequential unique-`oldString` edits; verified by `Select-String` (Fix 11–14 hits; no `phase3_crosscheck` build; `freeze_lattice.yaml` only in Fix-9 note; ω=`Cert`-separate intact; fallback `OR domains<2` intact; claims example all-`false`; bundle name + pointer present; no run-level `PARTIAL` success state outside Fix-12 history note).
+- `Path.md` (this entry): §§P1–P4 TO-RUN checklists now read through this §R2 + patched WorkPlan (checker-only viability, sealed-with-partials, evidence-flipped predicates, bundle pointer). Future phase entries must cite patched sections.
+
+### R2.3 Models / benchmarks / anti-overfitting
+
+Training: still none. Separation hardened: population never depends on the unaudited optimizer (checker/planner agreement separately tested in Phase 3, authoritative planner audit still in Phase 4); healthy PARTIAL ambiguity retained without blocking Phase 3; ledger genuinely evidence-derived (zero-gap fixture cannot flip finite-substitution); determinism brutally tested from the published bundle, provider nondeterminism isolated to live-rerun path.
+
+### R2.4 Stale results / verification
+
+`Get-ChildItem -Force` still only `LICENSE + WorkPlan.md + Path.md`; zero `results/`/`releases/` artifacts (nothing to clear; bundle mechanism defined before any bundle exists). Verification: [x] Fix 11 (`reachability.py`, `Viable(q)`, planner-first-use, import bans); [x] Fix 12 (no run PARTIAL success; sidecar + counts + no-backfill + Phase-3-authorized-with-partials); [x] Fix 13 (all-false example, 5 evidence predicates, permanent-false, generator-only-true); [x] Fix 14 (bundle name, pointer path/content, git-ignore rule, reproduce-via-pointer, tamper-detect, no normal-Git bulk).
+
+### R2.5 Deviations
+
+None from final review. Rejected: reusing production planner for eligibility (firewall + audit risk); `CONTRACT_SEALED_WITH_PARTIALS` rename (plain `CONTRACT_SEALED` + counts simpler per review); pre-authorized `true` predicates; Git-LFS/normal-Git bulk commit for trajectories (release-bundle preferred per review).
+
+**WorkPlan-follows: YES.** Implements exactly the 4 final fixes; no gate claimed; next is Phase 1 per patched WorkPlan Appendix C.
+
 ---
 
 ## Commit/push log (user requirement: push after each phase without being asked)
@@ -113,6 +139,7 @@ None from review. Rejected: 5th/6th phase split (kept 4); symlink/copy freeze fi
 |---|---|---|---|
 | 2026-09-06 | `b9372d9 docs: WorkPlan.md + Path.md setup` pushed `573c701..b9372d9 main->main` | planning (no gate) | `origin/main` |
 | 2026-09-06 | `455b6db` review patch Fix 1–10 + Path §R1 pushed `f52eb02..455b6db main->main` | planning patch (no gate) | `origin/main` |
+| 2026-09-06 | final 4 fixes Fix 11–14 + Path §R2 (pending push) | planning patch (no gate) | `origin/main` |
 | — | Phase 1 commit (pending) | PREREGISTERED/STOP | — |
 | — | Phase 2 commit (pending) | CONTRACT_SEALED/PARTIAL/STOP | — |
 | — | Phase 3 commit (pending) | MEASURED | — |
