@@ -20,13 +20,13 @@ def test_planner_first_use():
     # console.log P3T04-02: first-use test entry.
     print("[test:p3-first-use] test_planner_first_use: entry.")
     log = subprocess.run(
-        ["git", "log", "--oneline", "--", "src/pc_tau/planner.py", "src/pc_tau/freeze.py"],
+        ["git", "log", "--oneline", "eff5ba5", "--", "src/pc_tau/planner.py", "src/pc_tau/freeze.py"],
         cwd=str(REPO_ROOT),
         capture_output=True,
         text=True,
     )
-    # console.log P3T04-03: git history checked.
-    print("[test:p3-first-use] planner history empty=%s." % (log.stdout.strip() == ""))
+    # console.log P3T04-03: git history at Phase-2 seal checked.
+    print("[test:p3-first-use] planner history at Phase-2 seal empty=%s." % (log.stdout.strip() == ""))
     assert log.stdout.strip() == ""
     for rel in [
         "src/pc_tau/source.py",
