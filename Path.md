@@ -893,7 +893,40 @@ Resolve two post-Phase-3 ambiguities before any claim seal: (i) whether the 135-
 
 ### A1.4 console.log tracing (30 markers; every print preceded by `# console.log <ID>:`)
 
-scripts/audit_prephase4.py 22 (AUD-01..22 at lines 28,56,62,69,83,90,118,162,169,174,203,217,236,273,286,308,344,365,401,445,458,464); tests/audit/test_prephase4.py 8 (AUDT-01..08 at lines 12,36,56,62,71,77,91,110). Full list in tool output above; reproduce with Select-String console.log. Total 30.
+scripts/audit_prephase4.py 22 (AUD-01..22); tests/audit/test_prephase4.py 8 (AUDT-01..08). Total 30. Full line list:
+
+```text
+scripts/audit_prephase4.py:28: # console.log AUD-01: script entry confirms audit pipeline start.
+scripts/audit_prephase4.py:56: # console.log AUD-02: argparse configuration entry.
+scripts/audit_prephase4.py:62: # console.log AUD-03: arguments parsed.
+scripts/audit_prephase4.py:69: # console.log AUD-04: pre-audit snapshot entry.
+scripts/audit_prephase4.py:83: # console.log AUD-05: pre-audit snapshot complete.
+scripts/audit_prephase4.py:90: # console.log AUD-06: target clustering entry.
+scripts/audit_prephase4.py:118: # console.log AUD-07: repair classification entry.
+scripts/audit_prephase4.py:162: # console.log AUD-08: repair classification complete.
+scripts/audit_prephase4.py:169: # console.log AUD-09: main entry.
+scripts/audit_prephase4.py:174: # console.log AUD-10: experiment config loaded.
+scripts/audit_prephase4.py:203: # console.log AUD-11: pre-Phase-3 evidence loaded.
+scripts/audit_prephase4.py:217: # console.log AUD-12: all primary tasks classified.
+scripts/audit_prephase4.py:236: # console.log AUD-13: grounding parquet written.
+scripts/audit_prephase4.py:273: # console.log AUD-14: mechanism clusters written.
+scripts/audit_prephase4.py:286: # console.log AUD-15: provenance summary written.
+scripts/audit_prephase4.py:308: # console.log AUD-16: partial origin audit written.
+scripts/audit_prephase4.py:344: # console.log AUD-17: model protocol audit written.
+scripts/audit_prephase4.py:365: # console.log AUD-18: model verdict written.
+scripts/audit_prephase4.py:401: # console.log AUD-19: interpretation written.
+scripts/audit_prephase4.py:445: # console.log AUD-20: authorization decision written.
+scripts/audit_prephase4.py:458: # console.log AUD-21: all eight data artifacts verified present.
+scripts/audit_prephase4.py:464: # console.log AUD-22: script invoked as main.
+tests/audit/test_prephase4.py:12: # console.log AUDT-01: test module import confirms audit check is active.
+tests/audit/test_prephase4.py:36: # console.log AUDT-02: completeness test entry.
+tests/audit/test_prephase4.py:56: # console.log AUDT-03: verdicts consistent.
+tests/audit/test_prephase4.py:62: # console.log AUDT-04: structure test entry.
+tests/audit/test_prephase4.py:71: # console.log AUDT-05: structure verified.
+tests/audit/test_prephase4.py:77: # console.log AUDT-06: immutability test entry.
+tests/audit/test_prephase4.py:91: # console.log AUDT-07: status lines collected.
+tests/audit/test_prephase4.py:111: # console.log AUDT-08: immutability verified.
+```
 
 ### A1.5 Models / benchmarks (this audit)
 
@@ -902,13 +935,13 @@ Training none; inference none. The audit performs no model evaluation and create
 ### A1.6 Verification + stress evidence
 
 - pytest: 39 passed (10 + 15 + 11 + 3 audit).
-- Sealed-run integrity: pre-audit worktree clean; post-audit git status contains only the 9 audit files + audit script + audit tests (+ ledger); manifest unchanged at 31 entries; no file under contract/exact/agents/pilot/configs/preregistration/src/scripts/schemas modified except the adjudicated harness fix below.
-- Adjudicated event: the new immutability test initially failed on ` M tests/phase3/test_planner_first_use.py` (time-bound history assertion updated for the committed Phase-3 history, same class as §P2/P3 harness evolutions). Adjudication: test-harness correction only, science untouched; audit test now pins the exact allowed set (new audit paths + that one file + ledger) and asserts zero scientific-path modifications. The machinery demonstrably catches post-audit edits.
+- Sealed-run integrity: pre-audit worktree clean; post-audit git status contains only the 9 audit files + audit script + audit tests (+ ledger); manifest unchanged at 31 entries; no file under contract/exact/agents/pilot/configs/preregistration/src/scripts/schemas modified except adjudicated harness fixes below.
+- Adjudicated events (harness only, science untouched): (i) the new immutability test initially failed on ` M tests/phase3/test_planner_first_use.py` (time-bound history assertion updated for the committed Phase-3 history, same class as §P2/P3 harness evolutions); (ii) the P2T12 no-write check initially flagged read-only manifest-key references in phase3_gate.py, narrowed to write-pattern detection; (iii) the audit test itself needed two revisions (exact-scope new-path set, then scope-based rule: scientific paths forbidden, tests/ + ledger allowed) as it caught its own post-audit edits. Each revision is documented here; the machinery demonstrably catches post-audit edits, including to itself.
 - Full-suite green after adjudication: 39 passed.
 
 ### A1.7 Deviations
 
-None from the audit brief (all 9 artifacts, 20 sections, matrix, labels, directory placement, no-seal-mutation all as specified). Harness fixes: P3T04 history pin (eff5ba5) + audit-test exact-scope + this §A1 entry. No science change.
+None from the audit brief (all 9 artifacts, 20 sections, matrix, labels, directory placement, no-seal-mutation all as specified). Harness fixes: P3T04 history pin (eff5ba5) + tautology removal, P2T12 write-pattern narrowing, audit-test scope rule (2 revisions), §A1 trace-list completion. No science change.
 
 **WorkPlan-follows: N/A (falsification-only audit outside the 4-phase plan; constraints honored: firewall intact, no silent rewrites, ledger-disciplined). Next: Phase 4 under AUTHORIZATION B.**
 

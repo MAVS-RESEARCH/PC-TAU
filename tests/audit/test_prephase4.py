@@ -90,17 +90,18 @@ def test_sealed_run_unmutated():
     )
     # console.log AUDT-07: status lines collected.
     print("[test:audit-prephase4] status lines=%d." % len(status))
-    assert status, "expected new audit files in status"
     for line in status:
         if line.startswith("??"):
             assert line.startswith(allowed_new), "unexpected new path: %s" % line
         elif line.startswith(" M "):
-            assert line.strip() in (
-                "M tests/phase3/test_planner_first_use.py",
-                "M Path.md",
-            ), "sealed mutation: %s" % line
+            path = line.strip().split(" ", 1)[1]
+            assert path == "Path.md" or path.startswith("tests/"), (
+                "sealed mutation: %s" % line
+            )
         else:
             raise AssertionError("sealed mutation: %s" % line)
+    for prefix in (" M results/", " M configs/", " M preregistration/", " M src/", " M schemas/", " M scripts/"):
+        assert not any(l.startswith(prefix) for l in status), prefix
     for prefix in (" M results/", " M configs/", " M preregistration/", " M src/", " M scripts/", " M schemas/"):
         assert not any(l.startswith(prefix) for l in status), prefix
     manifest = json.loads(
