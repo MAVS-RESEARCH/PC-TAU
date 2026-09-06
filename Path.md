@@ -85,7 +85,7 @@ _Status: PENDING._
 
 | Date (UTC) | Commit | Gate | Remote |
 |---|---|---|---|
-| 2026-09-06 | `docs: WorkPlan.md + Path.md setup` (pending push, see §0.6) | planning (no gate) | `origin/main` |
+| 2026-09-06 | `b9372d9 docs: WorkPlan.md + Path.md setup` pushed `573c701..b9372d9 main->main` | planning (no gate) | `origin/main` |
 | — | Phase 1 commit (pending) | PREREGISTERED/STOP | — |
 | — | Phase 2 commit (pending) | CONTRACT_SEALED/PARTIAL/STOP | — |
 | — | Phase 3 commit (pending) | MEASURED | — |
