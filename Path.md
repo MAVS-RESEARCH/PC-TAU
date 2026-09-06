@@ -875,7 +875,7 @@ None from final review. Rejected: reusing production planner for eligibility (fi
 | 2026-09-06 | `3cd12da` final 4 fixes Fix 11–14 + Path §R2 pushed `49989bd..3cd12da main->main` | planning patch (no gate) | `origin/main` |
 | 2026-09-06 | `19004b7` phase1: PREREGISTERED pctau-20260906-672227c pushed `b378cb7..19004b7 main->main` | PREREGISTERED | `origin/main` |
 | 2026-09-06 | `eff5ba5` phase2: CONTRACT_SEALED pctau-20260906-672227c pushed `5bb670c..eff5ba5 main->main` | CONTRACT_SEALED | `origin/main` |
-| 2026-09-06 | phase3: MEASURED pctau-20260906-672227c (pending push) | MEASURED | `origin/main` |
+| 2026-09-06 | `a05e874` phase3: MEASURED pctau-20260906-672227c pushed `8f23ab2..a05e874 main->main` | MEASURED | `origin/main` |
 | — | Phase 2 commit (pending) | CONTRACT_SEALED/STOP | — |
 | — | Phase 3 commit (pending) | MEASURED | — |
 | — | Phase 4 commit (pending) | SEALED/INVALID | — |
