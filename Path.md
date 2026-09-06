@@ -112,7 +112,7 @@ None from review. Rejected: 5th/6th phase split (kept 4); symlink/copy freeze fi
 | Date (UTC) | Commit | Gate | Remote |
 |---|---|---|---|
 | 2026-09-06 | `b9372d9 docs: WorkPlan.md + Path.md setup` pushed `573c701..b9372d9 main->main` | planning (no gate) | `origin/main` |
-| 2026-09-06 | review patch Fix 1–10 into WorkPlan.md + Path §R1 (pending push) | planning patch (no gate) | `origin/main` |
+| 2026-09-06 | `455b6db` review patch Fix 1–10 + Path §R1 pushed `f52eb02..455b6db main->main` | planning patch (no gate) | `origin/main` |
 | — | Phase 1 commit (pending) | PREREGISTERED/STOP | — |
 | — | Phase 2 commit (pending) | CONTRACT_SEALED/PARTIAL/STOP | — |
 | — | Phase 3 commit (pending) | MEASURED | — |
