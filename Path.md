@@ -79,6 +79,32 @@ Required: scope; files (`src/pc_tau_audit/*`, `audit/*`, `reports/CLAIMS.md`, `R
 
 _Status: PENDING._
 
+## §R1 — Review patch: 10 fixes into WorkPlan.md (2026-09-06, UTC)
+
+### R1.1 Scope
+
+Apply the 10-issue review (Phase-1 contradiction; underspecified extraction; weak MULTI_ACTION; late refactoring seal; ω/P_R bug; impossible byte-identical live reproduction; 3 planners; fallback single-domain trap; heavy artifacts; keyword claim locks) to `WorkPlan.md` without redesign. No scientific code, no freezes, no model runs in this entry. `WorkPlan.md` stays at 4 phases; implement-exactly/stop-on-gates frozen.
+
+### R1.2 Files changed + how coded
+
+- `WorkPlan.md` only (14 edits, `grep -c "Fix [0-9]"` = 35 hits post-patch): §0.3 (Fix 1 pilot-provisional, Fix 3 predicate, Fix 7 sole planner, Fix 10 predicates); §0.4 (Fix 8 `N<40 OR domains<2` + multidomain pilot); §0.5 (Fix 3 viable-route + Fix 5 `U_H/H/P_R/Λ/ω/Cert`); §0.6–0.7 (Fix 9 run-scoped `results/<run_id>/` + single `freezes.yaml` + manifest, Fix 6 split reproduction); Phase 1 (Fix 1 exception box + provisional `pilot/provisional_geometry.jsonl`, Fix 3/8 gates, Fix 9/10 files); Phase 2 (Fix 2 `extract→verify→compile` + `extraction_protocol/records.json`, Fix 4 `semantic_boundary_policy/admissible_refactorings/contract_family_rules.json` frozen at G2, Fix 5 math, Fix 3 `viable_first_repairs>=2` predicate); Phase 3 (Fix 7 production-only + `planner_selftest.json`, Fix 6 archive-for-replay, Fix 4 untouched); Phase 4 (Fix 4 frozen-class execution, Fix 6 exact-replay vs live-rerun, Fix 7 `planner_agreement.json`, Fix 8 population-integrity, Fix 9 run-scoped audit/reports + graph, Fix 10 predicate ledger + generator); Appendices A–C (predicate enforcement, fix index, commands: +`phase2_verify.py` +`phase2_freeze_refactor_policy.py`, −`phase3_crosscheck.py`, +`--reproduce/--replicate-live`).
+- Method: sequential `edit` with unique `oldString` per fix; verified by `Select-String` (Fix count, `freeze_lattice.yaml` only in Fix-9 note, no `phase3_crosscheck` creation, no `certificate predicate` for ω, no keyword-blacklist logic, no single-domain trap). No invented SHAs/IDs/K_Pi.
+- `Path.md` (this entry): §§P1–P4 checklists below are superseded on paths/predicates by this §R1 + patched WorkPlan (run-scoped `results/<run_id>/…`, viable-route, frozen refactor class, predicate ledger, split reproduction, two planners). Future phase entries must cite patched WorkPlan sections.
+
+### R1.3 Models / benchmarks / anti-overfitting
+
+Training: still none. Brutal-difference preserved and strengthened: pilot provisional invisible downstream; viable-route blocks dead-button degeneracy; frozen refactor class blocks perturbation shopping; ω-precise leakage blocks truth-in-channel; exact-replay (byte-identical) separated from live-rerun (new run-id, stats only); two-planner (not three) keeps full independence with less weight; fallback trap closed; predicate locks close paraphrase bypass.
+
+### R1.4 Stale results / verification
+
+`Get-ChildItem -Force` still shows only `LICENSE + WorkPlan.md + Path.md`; zero `results/` artifacts (nothing to clear). Verification: [x] all 10 fixes present (`Fix 1`–`Fix 10` each hit); [x] single freeze file (no `freeze_lattice.yaml` creation); [x] no sidecars (only "no sidecars" mentions); [x] no 3-planner logic; [x] ω = channel + `Cert` separate; [x] fallback `OR domains<2`; [x] predicate ledger example valid JSON keys; [x] commands include `phase2_verify`, `phase2_freeze_refactor_policy`, `--reproduce`, `--replicate-live`, no `phase3_crosscheck.py` build.
+
+### R1.5 Deviations
+
+None from review. Rejected: 5th/6th phase split (kept 4); symlink/copy freeze files (Windows-safe single file); inventing tau2-bench SHA/model IDs (still deferred).
+
+**WorkPlan-follows: YES.** Implements exactly the 10-fix patch list; no gate claimed; next is Phase 1 per patched WorkPlan Appendix C.
+
 ---
 
 ## Commit/push log (user requirement: push after each phase without being asked)
@@ -86,6 +112,7 @@ _Status: PENDING._
 | Date (UTC) | Commit | Gate | Remote |
 |---|---|---|---|
 | 2026-09-06 | `b9372d9 docs: WorkPlan.md + Path.md setup` pushed `573c701..b9372d9 main->main` | planning (no gate) | `origin/main` |
+| 2026-09-06 | review patch Fix 1–10 into WorkPlan.md + Path §R1 (pending push) | planning patch (no gate) | `origin/main` |
 | — | Phase 1 commit (pending) | PREREGISTERED/STOP | — |
 | — | Phase 2 commit (pending) | CONTRACT_SEALED/PARTIAL/STOP | — |
 | — | Phase 3 commit (pending) | MEASURED | — |
