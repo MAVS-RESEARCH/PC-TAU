@@ -1,0 +1,16 @@
+canonical_file: configs/freezes.yaml
+cells:
+  F000: {E: false, R: false, A: false}
+  F100: {E: true, R: false, A: false}
+  F010: {E: false, R: true, A: false}
+  F001: {E: false, R: false, A: true}
+  F110: {E: true, R: true, A: false}
+  F101: {E: true, R: false, A: true}
+  F011: {E: false, R: true, A: true}
+  F111: {E: true, R: true, A: true}
+primary_model_facing:
+  - F000
+  - F100
+  - F010
+  - F001
+note: Exact solver runs all eight cells. Model-facing runs use the four primary cells only.
