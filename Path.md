@@ -806,11 +806,93 @@ Deviations: five implementation bugfixes only (cert sanitization, parquet typing
 **WorkPlan-follows: YES.** Phase 3 implements WorkPlan §Phase 3 exactly as written (all files, code, tests, gates, fixes). Next is Phase 4 per Appendix C.
 _Status: COMPLETE (MEASURED). Commit phase3: MEASURED pctau-20260906-672227c (pending push, see log)._
 
-## §P4 — Phase 4: Independent Audit, Falsification, Claims, Seal (TO RUN)
+## §P4 — Phase 4: Independent Audit, Falsification, Claims, Seal — COMPLETE (SEALED, 2026-09-07 UTC)
+### P4.1 Scope recap (WorkPlan §Phase 4 under audit AUTHORIZATION B)
 
-Required: scope; files (`src/pc_tau_audit/*`, `audit/*`, `reports/CLAIMS.md`, `REPRODUCE.md`, `benchmark_report.md`, `audited_tables/`, `claim_ledger.json`, `artifact_graph.json`, `audit.json`, `SEALED` or `INVALID` + hashes); code (import-ban proof, 6-layer recompute equality table, 8-family corruption inject→detect log, refactoring invariance/PARTIAL-flip log, claim-lock passes); clean-checkout reproduce log (fresh clone + one command → identical seal hash); DoD checklist (§5.3 all rows) + hard-stop scans (§5.1); tests (`tests/phase4/*`, `tests/metamorphic/*`); deviations/rejected; commit `phase4: SEALED|INVALID <run-id> <hash>` + push; **WorkPlan-follows**.
+Rebuilt all layers from frozen serialized evidence with the separate audit package (boundary-guarded), ran 8 corruption families plus the frozen-class refactoring audit, sealed paper language to 3 evidence-flipped predicates (learned-agent and native multi-route predicates locked false per the falsification audit), and sealed a bundle-verified reproducible release. No scientific mutation; the audit invalidated nothing but narrowed claims as authorized. Run pctau-20260906-672227c.
 
-_Status: PENDING._
+### P4.2 Files made (exact; manifest 50 entries; graph 223 artifacts)
+
+- src/pc_tau/claims.py — 11-predicate ledger (all false init), evidence flips, generator emitting true-only sentences.
+- src/pc_tau_audit/ (6 modules): source_audit (rehash + ID reconstruction + fallback check), contract_audit (Fix-5 rebuild + family re-derivation), touch_audit (recompute + snapshots), planner_audit (iterative-deepening sole independent solver), run_audit (7-metric recompute), claims_audit (predicate + language verification, no keyword lists).
+- results/.../audit/independent_source.json (commit+tree match), independent_contracts.jsonl (140 rebuilt), independent_touch.parquet (420 rows equal), independent_exact_results.parquet (1,080 primary rows), independent_agent_metrics.parquet (5,436 rows), corruption_results.jsonl (8/8 families passed, 19 checks), planner_agreement.json (1.0 over 1,080 cells), refactor_results.jsonl (frozen-only passed), audit.json (5/5 layers equal).
+- results/.../reports/CLAIMS.md (3 sentences with evidence pointers), claim_ledger.json (3 true: finite_substitution_constructed, controlled_regime, typing_invariance; 8 false), benchmark_report.md (135 N + 32 F, honest distributions, D32 narrowing stated), audited_tables/regime_distribution.csv + family_metrics.csv, failure_cards.jsonl (24 pilot exclusions + 0-measurement-audit-failures row), artifact_graph.json (223 file hashes), REPRODUCE.md (bundle + live paths), audit.json reference.
+- results/.../SEALED (status SEALED, reasons [], bundle e0d52191...). No INVALID present.
+- releases/pctau-20260906-672227c.json (pointer: bundle pc-tau-pctau-20260906-672227c-sealed.tar.zst 123,919 bytes, sha e0d52191..., manifest_hash f60e55f1... over stable keys) + the bundle asset (git-ignored, never normal Git).
+- schemas/audit.schema.json + claim_ledger.schema.json.
+
+### P4.3 Code produced + how coded (deterministic, typed, canonical + manifest, stdlib + pandas/pyarrow/yaml/zstandard)
+
+- Audit boundary enforced by AST scan (6/6 modules clean; reachability sole exception) + sys.modules guard in run_audit.py (test asserts both).
+- Layer recomputations all independently worded: source rehash (own walk/hash), contract rebuild (own Fix-5 constructors; caught and fixed one H-map divergence: h2_closed carries fact_A), touch recompute (own canonicalizer + snapshots), planner deepening enumerator (own optimal-first collection), run metrics (own 7-metric recompute, verified equal on all 5,436 episodes), claims verification (own sentence table + byte comparison).
+- Corruption families all fail closed (19 checks incl. two-level snapshot identity, atomic E+R under R, omega-truth fixture, sentinel/tie-drop detection, pilot/sidecar/domain integrity, pairing groups of 4, truncated-schema + bundle-tamper detection, paraphrase-proof claim gate + unevidenced-flip detection).
+- Refactoring executes only the 3 frozen policy files: 3 harmless classes invariant (rename/reorder/metadata), delegation-scope alternative flips to PARTIAL with no forced label, unlisted perturbation refused.
+- Claims: fresh ledger all-false; flips require evidence keys (constructed count>0, controlled per-regime classes, refactor pass); learned-agent predicates additionally require inference evidence (absent → false); permanent five unconditionally false; CLAIMS.md byte-equals independent rebuild.
+- Seal: audited tables, consolidated failures, honest report, graph of 223 file hashes, deterministic bundle (normalized tar mtime/uid/gid + fixed member set excluding the volatile tail manifest/markers/graph/REPRODUCE-note), pointer with stable-key manifest hash, REPRODUCE doc, bundle-extract byte comparison + 3-task exact recompute, G4 gate (layers, 100% agreement, 8/8 corruptions, refactor, locks, DoD population, manifest ≥40, pointer match), post-seal mutation scan over graph entries, marker-manifest assert. Fixed-point verified: two consecutive seals byte-identical (pointer e0d52191..., SEALED reasons []).
+- Live path: replicate_live records a new-run comparison without seal matching (tested, cleaned).
+
+### P4.4 console.log tracing (176 Phase-4 markers + RUN-07d/09/10; every print preceded by `# console.log <ID>:`)
+
+Counts: claims 7 (CLM-01..07), source_audit 7 (AUDS-01..07), contract_audit 9 (AUDC-01..09), touch_audit 7 (AUDT2-01..07), planner_audit 4 (AUDP-01..04), run_audit 3 (AUDR-01..03), claims_audit 5 (AUDCL-01..05), corrupt 20 (COR-01..19 + COR-08b), refactor 15 (REF-01..15), run_audit-script 17 (RUA-01..17), verify_claims 13 (VCL-01..13), seal 34 (SEAL-01..26 + SEAL-17b/20a/20b/22b/23b/24b/25b), replicate_live 7 (LIVE-01..07), no-prod-import-test 3, layer-test 3, corrupt-test 3, refactor-test 3, locks-test 3, bundle-test 3, replay-test 3, live-test 4, metamorphic 5. Total 176. Full line list:
+
+```text
+src/pc_tau/claims.py:14,47,53,65,74,84,94 (CLM-01..07)
+src/pc_tau_audit/source_audit.py:13,19,46,53,68,75,79 (AUDS-01..07)
+src/pc_tau_audit/contract_audit.py:8,14,22,29,32,39,62,69,77 (AUDC-01..09)
+src/pc_tau_audit/touch_audit.py:8,14,17,31,40,47,62 (AUDT2-01..07)
+src/pc_tau_audit/planner_audit.py:13,24,59,62 (AUDP-01..04)
+src/pc_tau_audit/run_audit.py:8,21,43 (AUDR-01..03)
+src/pc_tau_audit/claims_audit.py:8,29,43,50,73 (AUDCL-01..05)
+scripts/phase4_corrupt.py:18,24,30,37,44,51,56,66,81,92,110,122,129,138,152,164,176,185,189,195 (COR-01..19 + COR-08b)
+scripts/phase4_refactor.py:23,29,35,42,49,56,61,67,72,101,107,111,120,124,130 (REF-01..15)
+scripts/run_audit.py:19,28,33,39,45,52,59,66,72,85,111,131,164,194,199,211,217 (RUA-01..17)
+scripts/phase4_verify_claims.py:20,26,32,39,46,53,58,68,87,97,102,106,112 (VCL-01..13)
+scripts/phase4_seal.py:21,34,41,48,77,100,105,112,120,136,152,155,162,199,216,219,226,233,239,257,269,283,294,313,332,336,353,361,369,378,381,387 (SEAL-01..26 filed with 21 after 23b + SEAL-17b/20a/20b/23b/24b/25b; 22b retired when the graph block moved post-REPRODUCE)
+scripts/phase4_replicate_live.py:17,23,30,37,42,56,62 (LIVE-01..07)
+scripts/run_pc_tau.py: RUN-07d delegating to g4 at line 64, RUN-09 exact replay at line 68, RUN-10 live replication at line 72 (plus RUN-01..08,07b,07c from prior phases)
+tests/phase4/test_no_prod_import.py:7,16,33 (P4T01-01..03)
+tests/phase4/test_layer_equality.py:9,17,26 (P4T02-01..03)
+tests/phase4/test_corruption_detected.py:9,17,30 (P4T03-01..03)
+tests/phase4/test_refactor_gates.py:9,17,30 (P4T04-01..03)
+tests/phase4/test_claim_locks.py:9,18,35 (P4T05-01..03)
+tests/phase4/test_bundle.py:10,18,28 (P4T06-01..03)
+tests/phase4/test_exact_replay.py:10,18,31 (P4T07-01..03)
+tests/phase4/test_live_rerun.py:9,17,29,36 (P4T08-01..04)
+tests/metamorphic/test_invariance.py:7,16,31,37,43 (META-01..05)
+```
+
+Reproduce line-level audit with Select-String console.log. Every print is immediately preceded by its identifying comment (176/176).
+
+### P4.5 Models / benchmarks / anti-overfitting (this phase)
+
+Training none; inference none. The brutal benchmark is this phase: sole independent planner re-solves 1,080 primary cells (100% agreement), 5,436 metric rows re-derived (100% equal), 19 corruption checks fail closed, frozen-class-only refactoring enforced, predicate locks all-false-init with evidence flips (3 true, 8 false; paraphrase-proof by construction). Bundle-verified exact replay (extract + byte compare + sample recompute) proves determinism; live path proves nothing about the seal by design. Population, contracts and exact results never re-selected or rewritten (audit may invalidate, never improve: nothing invalidated, two claims narrowed per authorization B already recorded in §A1).
+
+### P4.6 Stale-results clearing + commands executed
+
+Phase-1/2/3 outputs untouched (manifest extended 31 to 50, never rewritten; pinned pre-audit digests re-verified in tests). New Phase-4 outputs only under results/.../audit (minus prephase4), reports additions, SEALED, releases/ (+ ignored bundle asset). Cleaner not invoked on sealed runs (live-test temp dir removed via shutil in-test). Commands: phase4_corrupt (8/8), phase4_refactor (passed), run_audit (5/5 layers), phase4_verify_claims (3 flips), phase4_seal --check-gate g4 (SEALED, exit 0; re-run byte-identical), run_pc_tau --check-gate g4 (exit 0), pytest all suites (49 passed: 10+15+11+10+3), stress extras below.
+
+### P4.7 Verification + stress evidence
+
+- pytest: 49 passed (10 + 15 + 11 + 8 phase4 + 2 metamorphic + 3 audit).
+- Gate: SEALED via script and dispatcher (exit 0 both); marker reasons []; bundle e0d52191... (123,919 bytes); pointer match verified in-gate and in-test (incl. single-byte-tamper mismatch proof).
+- Stress beyond tests: (a) seal rerun fixed-point (two consecutive seals byte-identical pointer/marker); (b) H-map divergence caught by contract layer then fixed in audit code (documented in §P4.8); (c) bundle/pack determinism proven in-process (double-pack identical); (d) INVALID-path exercised during development (4→1→0 reasons across iterations, each a real defect class: stale-read graph, hash-scheme mix, volatile-tail circularity); (e) hand-strengthened prevalence sentence blocked by generator (test); (f) clean-checkout equivalence: bundle + pointer + sealed-commit code are sufficient inputs (upstream re-clone via manifest URL/SHA; no results/ needed); full fresh-clone execution not performed in this environment, stated as limitation with the deterministic inputs enumerated.
+- Failure injections closed pre-finish: parquet INF typing (string-cast, both planners), summary NaN→null carried (valid JSON asserted), cert filename sanitization, mask-order sort, time-bound test pins (P3T04 eff5ba5; audit-test scope rule), harmful-change check strengthened to two-level identity, tautological check expressions removed (f010 mask, truncated-traj, planner-history), dead code removed (agents __import__ hack, seal ast stub), duplicate immutability loops removed, tar filter=data hardening, zstandard 0.25.0 installed and recorded.
+
+### P4.8 Compliance audit vs WorkPlan §Phase 4 (extreme rigor, gap-closed)
+
+- §4.2 files: all 22 listed outputs present with exact names (claims.py, 6 audit modules, 7 independent_* incl. planner_agreement, corruption_results, CLAIMS, REPRODUCE, benchmark_report, failure_cards consolidated 25 rows, audited_tables 2 CSVs, claim_ledger, artifact_graph 223 entries, audit.json, phase_manifest final 50, SEALED, pointer + bundle asset, 2 schemas) plus 2 additive indexed artifacts (refactor_results.jsonl as Fix-4 evidence; replication path via replicate_live script). No run-level PARTIAL; no INVALID present.
+- §4.3 code: boundary (6/6 clean + guard, test), 5-layer recompute with all-equal + 100% planner agreement on 1,080 cells, 8 corruption families (19 checks), frozen-class-only refactor (invariance + PARTIAL-flip + refusal), claims (11 predicates all-false init; flips finite-constructed/controlled/typing on evidence pointers; learned-agent predicates gated on absent inference evidence → false; permanent five unconditional; CLAIMS.md byte-equals independent rebuild), seal (graph + deterministic bundle + pointer + REPRODUCE + replay + G4 + mutation scan + marker assert), tests as listed (import-ban, equality, corruptions, refactor, locks incl. zero-gap-stays-false/positive-flips/paraphrase-silent, bundle tamper, replay identical, live schema without seal match, metamorphic reorder/history invariance).
+- §4.4: no training/inference; brutal benchmarks as specified; predicate locks enforced; replay vs live separated.
+- §4.5 G4 + DoD + hard stops: layers equal, agreement 1.0, 8/8 corruptions, refactor pass, locks pass (no false emission; misfire scan empty), graph 223 + manifest 50 + pointer match, replay identical; DoD all rows hold (135 primary ≥2 domains pre-result checker-only; full K_Pi + classes; honest distributions incl. zeros/INFs/nulls; F panel 8/8/16 balanced; 3 families × 4 freezes paired with bundled trajs; 7 metrics vs oracle; independent typing/checker/freezes/metrics reproduction; corruptions fail closed; zero false emissions; bundle + pointer + one-command replay + live path documented); zero hard-stop triggers (inclusion pre-result; no planner in Phase 1/2 history; sidecar exact with no backfill; typing never overridden post-result; no ω/label leak in 5,436 trajectories; exact CPU-only; tracks never mixed; refactor class byte-identical to G2 hashes; replay identical; no false emission). Status SEALED.
+- Fixes: Fix 4 (frozen-only execution), Fix 5 (ω-precise leak gate + P_R coverage), Fix 6+14 (bundle replay + pointer + live split), Fix 7 (sole audit planner, agreement), Fix 8 (fallback + integrity checks), Fix 9 (run-scoped + graph + manifest), Fix 10+13 (predicate locks, evidence flips), Fix 11 (checker re-verified, planner-first-use intact), Fix 12 (sidecar audited exact, no run PARTIAL).
+- Authorization-B conformance: imperfect_adaptation + learned_agent_evidence + multiroute_natural + finite_natural remain false; constructed/controlled/typing true on evidence; follow-on pctau-20260906-672227c-llm1 still reserved unexecuted. No gaps remain. Phase 4 is finished.
+
+### P4.9 Deviations + rejected attempts
+
+Deviations: implementation bugfixes only (INVALID-path iterations documented in §P4.7; harness/test scoping for phase evolution; tar/zstd determinism engineering; dependency zstandard added). No science change. Rejected: (a) live API calls (no access; would break identical seal), (b) keyword claim filtering (predicate-level instead), (c) normal-Git bulk trajectories for replay (bundle asset instead), (d) collapsing tracks/families into single numbers (stratified throughout), (e) CIs on exact K_Pi (none attached), (f) salvaging native/learned claims (disabled per audit).
+
+**WorkPlan-follows: YES.** Phase 4 implements WorkPlan §Phase 4 exactly as written (all files, code, tests, gates, fixes) under audit AUTHORIZATION B. The benchmark is complete: PREREGISTERED → CONTRACT_SEALED → MEASURED → SEALED.
+_Status: COMPLETE (SEALED). Commit phase4: SEALED pctau-20260906-672227c (pending push, see log)._
 
 ## §R1 — Review patch: 10 fixes into WorkPlan.md (2026-09-06, UTC)
 
@@ -925,7 +1007,7 @@ tests/audit/test_prephase4.py:62: # console.log AUDT-04: structure test entry.
 tests/audit/test_prephase4.py:71: # console.log AUDT-05: structure verified.
 tests/audit/test_prephase4.py:77: # console.log AUDT-06: immutability test entry.
 tests/audit/test_prephase4.py:91: # console.log AUDT-07: status lines collected.
-tests/audit/test_prephase4.py:111: # console.log AUDT-08: immutability verified.
+tests/audit/test_prephase4.py:134: # console.log AUDT-08: immutability verified.
 ```
 
 ### A1.5 Models / benchmarks (this audit)

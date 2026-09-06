@@ -40,7 +40,7 @@ def run_script(repo_root: Path, name: str, extra: list[str]) -> int:
 
 
 def main() -> int:
-    """Dispatch gate checks (Phase 1 implements g1 only)."""
+    """Dispatch phase pipelines, gate checks and reproduction paths."""
     # console.log RUN-06: main entry.
     print("[run:dispatcher] main: entry.")
     args = parse_args()
@@ -61,10 +61,18 @@ def main() -> int:
         print("[run:dispatcher] main: delegating to g3.")
         return run_script(repo_root, "phase3_gate.py", extra + ["--check-gate", "g3"])
     if args.check_gate == "g4":
-        raise SystemExit("gate %s not implemented in Phase 1" % args.check_gate)
-    if args.reproduce or args.replicate_live:
-        raise SystemExit("reproduction paths activate at Phase 4 (Fix 6/Fix 14)")
-    raise SystemExit("specify --check-gate g1 (Phase 1 scope)")
+        # console.log RUN-07d: delegating to Phase-4 seal gate.
+        print("[run:dispatcher] main: delegating to g4.")
+        return run_script(repo_root, "phase4_seal.py", extra + ["--check-gate", "g4"])
+    if args.reproduce:
+        # console.log RUN-09: exact replay via bundle pointer.
+        print("[run:dispatcher] main: exact replay %s." % args.reproduce)
+        return run_script(repo_root, "phase4_seal.py", ["--config", args.config, "--run-id", args.reproduce])
+    if args.replicate_live:
+        # console.log RUN-10: live replication path.
+        print("[run:dispatcher] main: live replication %s." % args.replicate_live)
+        return run_script(repo_root, "phase4_replicate_live.py", ["--config", args.config, "--run-id", args.replicate_live])
+    raise SystemExit("specify --check-gate g4, --reproduce <id> or --replicate-live <id> (Phase 4 scope)")
 
 
 if __name__ == "__main__":

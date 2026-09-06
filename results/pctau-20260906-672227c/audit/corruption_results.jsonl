@@ -1,0 +1,8 @@
+{"checks":[{"detected":true,"name":"harmless-rename-invariant"},{"detected":true,"name":"harmful-change-detected"}],"family":"semantic-invariance","passed":true}
+{"checks":[{"detected":true,"name":"r-external-read-rejected"},{"detected":true,"name":"e-mapping-rejected"},{"detected":true,"name":"a-fact-rejected"}],"family":"boundary-violations","passed":true}
+{"checks":[{"detected":true,"name":"composite-atomic-under-R"},{"detected":true,"name":"r-repair-absent-in-F010"},{"detected":true,"name":"base-hash-single-per-task"}],"family":"freeze-integrity","passed":true}
+{"checks":[{"detected":true,"name":"omega-truth-fixture-detected"},{"detected":true,"name":"clean-channel-passes"}],"family":"information-leakage","passed":true}
+{"checks":[{"detected":true,"name":"no-numeric-sentinel"},{"detected":true,"name":"tied-omission-detectable"},{"detected":true,"name":"dropped-infinity-detectable"}],"family":"planner-integrity","passed":true}
+{"checks":[{"detected":true,"name":"pilot-excluded"},{"detected":true,"name":"partial-not-in-primary"},{"detected":true,"name":"two-domain-gate-holds"}],"family":"population-integrity","passed":true}
+{"checks":[{"detected":true,"name":"pairing-groups-of-four"},{"detected":true,"name":"truncated-traj-detected"},{"detected":true,"name":"bundle-tamper-detectable"}],"family":"agent-run-integrity","passed":true}
+{"checks":[{"detected":true,"name":"false-predicates-emit-nothing"},{"detected":true,"name":"unevidenced-flip-detected"}],"family":"claim-integrity","passed":true}

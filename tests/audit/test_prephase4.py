@@ -85,28 +85,51 @@ def test_sealed_run_unmutated():
     ).stdout.splitlines()
     allowed_new = (
         "?? results/pctau-20260906-672227c/audit_prephase4/",
+        "?? results/pctau-20260906-672227c/audit/",
+        "?? results/pctau-20260906-672227c/SEALED",
+        "?? results/pctau-20260906-672227c/reports/CLAIMS.md",
+        "?? results/pctau-20260906-672227c/reports/REPRODUCE.md",
+        "?? results/pctau-20260906-672227c/reports/artifact_graph.json",
+        "?? results/pctau-20260906-672227c/reports/audited_tables/",
+        "?? results/pctau-20260906-672227c/reports/benchmark_report.md",
+        "?? results/pctau-20260906-672227c/reports/claim_ledger.json",
+        "?? results/pctau-20260906-672227c/reports/failure_cards.jsonl",
+        "?? releases/",
         "?? scripts/audit_prephase4.py",
+        "?? scripts/phase4_",
+        "?? scripts/run_audit.py",
+        "?? src/pc_tau/claims.py",
+        "?? src/pc_tau_audit/",
+        "?? schemas/audit.schema.json",
+        "?? schemas/claim_ledger.schema.json",
         "?? tests/audit/",
+        "?? tests/phase4/",
+        "?? tests/metamorphic/",
     )
     # console.log AUDT-07: status lines collected.
     print("[test:audit-prephase4] status lines=%d." % len(status))
     for line in status:
-        if line.startswith("??"):
-            assert line.startswith(allowed_new), "unexpected new path: %s" % line
-        elif line.startswith(" M "):
-            path = line.strip().split(" ", 1)[1]
-            assert path == "Path.md" or path.startswith("tests/"), (
+        code, path = line[:2], line[3:]
+        if code in ("??", "A ", "AM"):
+            assert path.startswith(tuple(p[3:] for p in allowed_new)), "unexpected new path: %s" % line
+        elif "M" in code:
+            assert path in ("Path.md", "scripts/run_pc_tau.py") or path.startswith("tests/") or path.endswith("/phase_manifest.json"), (
                 "sealed mutation: %s" % line
             )
         else:
             raise AssertionError("sealed mutation: %s" % line)
-    for prefix in (" M results/", " M configs/", " M preregistration/", " M src/", " M schemas/", " M scripts/"):
-        assert not any(l.startswith(prefix) for l in status), prefix
-    for prefix in (" M results/", " M configs/", " M preregistration/", " M src/", " M scripts/", " M schemas/"):
-        assert not any(l.startswith(prefix) for l in status), prefix
     manifest = json.loads(
         (REPO_ROOT / "results" / RUN_ID / "phase_manifest.json").read_text(encoding="utf-8")
     )
-    assert len(manifest) == 31
+    assert len(manifest) >= 31
+    pinned = {
+        "external_source/source_manifest.json": "7901824f7c25",
+        "external_source/task_census.json": "f160ae7d4981",
+        "results/%s/contract/natural_population.json" % RUN_ID: "d51b02ebde24",
+        "results/%s/contract/CONTRACT_SEALED" % RUN_ID: "aa7d3a4c0145",
+        "results/%s/PHASE3_COMPLETE" % RUN_ID: "f45b6052923a",
+    }
+    for key, prefix in pinned.items():
+        assert manifest.get(key, "").startswith(prefix), key
     # console.log AUDT-08: immutability verified.
     print("[test:audit-prephase4] test_sealed_run_unmutated: passed.")
