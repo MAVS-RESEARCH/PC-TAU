@@ -56,7 +56,11 @@ def main() -> int:
         # console.log RUN-07b: delegating to Phase-2 gate.
         print("[run:dispatcher] main: delegating to g2.")
         return run_script(repo_root, "phase2_gate.py", extra + ["--check-gate", "g2"])
-    if args.check_gate in ("g3", "g4"):
+    if args.check_gate == "g3":
+        # console.log RUN-07c: delegating to Phase-3 gate.
+        print("[run:dispatcher] main: delegating to g3.")
+        return run_script(repo_root, "phase3_gate.py", extra + ["--check-gate", "g3"])
+    if args.check_gate == "g4":
         raise SystemExit("gate %s not implemented in Phase 1" % args.check_gate)
     if args.reproduce or args.replicate_live:
         raise SystemExit("reproduction paths activate at Phase 4 (Fix 6/Fix 14)")
