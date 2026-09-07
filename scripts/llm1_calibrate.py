@@ -153,12 +153,12 @@ def main() -> int:
         raw_dir / "cost_ledger.jsonl", "a", encoding="utf-8"
     ) as ledger:
         for model in args.models:
-        for task_id in tasks:
-            for cell, frozen in MASKS.items():
-                if (model, task_id, cell) in done:
-                    # console.log CAL-11b: completed episode skipped for resume.
-                    print("[llm1:calibrate] episode: skipping completed %s %s %s." % (model, task_id, cell))
-                    continue
+            for task_id in tasks:
+                for cell, frozen in MASKS.items():
+                    if (model, task_id, cell) in done:
+                        # console.log CAL-11b: completed episode skipped for resume.
+                        print("[llm1:calibrate] episode: skipping completed %s %s %s." % (model, task_id, cell))
+                        continue
                     turn_count = 0
                     messages = [
                         {"role": "system", "content": protocol["system_prompt"]},
