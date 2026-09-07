@@ -45,7 +45,7 @@ Scope: inspect sealed parent without mutation; verify seal/pointer/bundle/artifa
 
 ### L0.6 Deviations
 
-None from the brief's first-action order (§33 steps 1-15 complete; step 16+ blocked on absent key). Rejected: hard-coding model slugs/prices from memory (live discovery required); inventing pilot calibration tasks (deterministic rule from sealed pilot set); counting this implementation session as evidence (recorded as provenance only).
+None from the brief's first-action order (§33 steps 1-15 complete; step 16+ blocked on absent key). Rejected: hard-coding model slugs/prices from memory (live discovery required); inventing pilot calibration tasks (deterministic rule from sealed pilot set); counting this implementation session as evidence (recorded as provenance only). Scanner refinements (no science change): placeholder-aware key detection (`<...>` values and inline-code backticks pass; only real assignments fail), test-directory scoping for the key pattern, scanner self-skip. Two false positives adjudicated pre-commit: inline-code formatting, then the scanner's own pattern literals.
 
 **WorkPlan-follows: YES (L1 prep exactly as planned; live stages explicitly deferred). Next: live calibration only after the key exists.**
 
