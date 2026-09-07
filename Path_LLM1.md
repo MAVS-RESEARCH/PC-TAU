@@ -77,4 +77,4 @@ _Status: PENDING (blocked on L3)._
 
 | Date (UTC) | Commit | Gate | Remote |
 |---|---|---|---|
-| 2026-09-07 | `cb04525` L1 prep pushed `c3b87e2..cb04525 main->main` | prep (no gate) | `origin/main` |
+| 2026-09-07 | `cb04525` L1 prep pushed `c3b87e2..cb04525 main->main`; `4491d33` scanner hardening pushed `650b23e..4491d33` | prep (no gate) | `origin/main` |
