@@ -1,0 +1,148 @@
+{
+  "deepseek/deepseek-v4-flash": [
+    {
+      "completion_price": "0.000000168",
+      "prompt_price": "0.0000000679",
+      "provider_name": "DigitalOcean",
+      "status": 0,
+      "uptime": 99.86454405809243
+    },
+    {
+      "completion_price": "0.000000177212",
+      "prompt_price": "0.000000088606",
+      "provider_name": "StreamLake",
+      "status": 0,
+      "uptime": 99.8314910909279
+    },
+    {
+      "completion_price": "0.00000018",
+      "prompt_price": "0.00000009",
+      "provider_name": "DeepInfra",
+      "status": 0,
+      "uptime": 99.67374144886863
+    },
+    {
+      "completion_price": "0.000000224",
+      "prompt_price": "0.000000112",
+      "provider_name": "GMICloud",
+      "status": 0,
+      "uptime": 99.9101275066
+    },
+    {
+      "completion_price": "0.00000028",
+      "prompt_price": "0.00000013",
+      "provider_name": "SiliconFlow",
+      "status": 0,
+      "uptime": 99.82948247932475
+    },
+    {
+      "completion_price": "0.000000268",
+      "prompt_price": "0.000000134",
+      "provider_name": "Alibaba",
+      "status": 0,
+      "uptime": 98.6657484720668
+    },
+    {
+      "completion_price": "0.000000275",
+      "prompt_price": "0.000000138",
+      "provider_name": "Venice",
+      "status": 0,
+      "uptime": 99.59550561797754
+    },
+    {
+      "completion_price": "0.00000028",
+      "prompt_price": "0.00000014",
+      "provider_name": "Baidu",
+      "status": 0,
+      "uptime": 99.96665555185061
+    },
+    {
+      "completion_price": "0.00000028",
+      "prompt_price": "0.00000014",
+      "provider_name": "Novita",
+      "status": 0,
+      "uptime": 99.99633515048788
+    },
+    {
+      "completion_price": "0.00000028",
+      "prompt_price": "0.00000014",
+      "provider_name": "AtlasCloud",
+      "status": 0,
+      "uptime": 99.77377421963828
+    },
+    {
+      "completion_price": "0.00000028",
+      "prompt_price": "0.00000014",
+      "provider_name": "Parasail",
+      "status": 0,
+      "uptime": 99.69945149898565
+    },
+    {
+      "completion_price": "0.00000035",
+      "prompt_price": "0.00000015",
+      "provider_name": "NextBit",
+      "status": 0,
+      "uptime": 99.9110857070274
+    },
+    {
+      "completion_price": "0.0000005",
+      "prompt_price": "0.000000175",
+      "provider_name": "Mancer 2",
+      "status": 0,
+      "uptime": 99.50724352025229
+    },
+    {
+      "completion_price": "0.0000004",
+      "prompt_price": "0.0000002",
+      "provider_name": "Phala",
+      "status": 0,
+      "uptime": 99.99018549416037
+    },
+    {
+      "completion_price": "0.00000056",
+      "prompt_price": "0.00000021",
+      "provider_name": "Azure",
+      "status": 0,
+      "uptime": 98.6012835280566
+    }
+  ],
+  "qwen/qwen3.7-flash": [
+    {
+      "completion_price": "0.00000013",
+      "prompt_price": "0.00000003",
+      "provider_name": "Alibaba",
+      "status": 0,
+      "uptime": 100
+    }
+  ],
+  "z-ai/glm-4.7-flash": [
+    {
+      "completion_price": "0.0000004",
+      "prompt_price": "0.00000006",
+      "provider_name": "Venice",
+      "status": 0,
+      "uptime": 99.8
+    },
+    {
+      "completion_price": "0.0000004",
+      "prompt_price": "0.00000006",
+      "provider_name": "DeepInfra",
+      "status": 0,
+      "uptime": 99.78390059427336
+    },
+    {
+      "completion_price": "0.0000004",
+      "prompt_price": "0.0000000605",
+      "provider_name": "Cloudflare",
+      "status": 0,
+      "uptime": 98.87616624257845
+    },
+    {
+      "completion_price": "0.0000004",
+      "prompt_price": "0.00000007",
+      "provider_name": "Novita",
+      "status": -5,
+      "uptime": 75.6838905775076
+    }
+  ]
+}

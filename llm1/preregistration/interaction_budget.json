@@ -1,0 +1,1 @@
+{"MAX_API_TURNS_PER_EPISODE":12,"MAX_COMPLETION_TOKENS_PER_TURN":512,"MAX_CUMULATIVE_INPUT_TOKENS_PER_EPISODE":10000,"MAX_CUMULATIVE_OUTPUT_AND_REASONING_TOKENS_PER_EPISODE":2000,"derivation":"ceil(1.25 x max-model p95) rounded up; non-binding on calibration maxima except turns raised 8 to 12","fair":"one common envelope for all roster models"}

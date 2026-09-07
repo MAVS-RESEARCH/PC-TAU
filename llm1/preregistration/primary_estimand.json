@@ -1,0 +1,1 @@
+{"basis":"kappa 1 vs 2, both finite","comparisons":["F000 vs F100","F000 vs F001"],"contrast":"F000 vs F010","ordered_endpoints":["governance-correct completion","repair regret","excess escalation","finite-fallback discovery"],"promotion_ban":true,"secondary":["route discovery","optimal-route rate","freeze adaptation","unsafe attempts"]}

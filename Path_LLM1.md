@@ -49,11 +49,37 @@ None from the brief's first-action order (§33 steps 1-15 complete; step 16+ blo
 
 **WorkPlan-follows: YES (L1 prep exactly as planned; live stages explicitly deferred). Next: live calibration only after the key exists.**
 
-## §L1 — Preregistration (TO RUN: discovery → calibration → roster → budget → schedule → commit LLM1_PREREGISTERED)
+## §L1 — Preregistration — COMPLETE (LLM1_PREREGISTERED, 2026-09-07 UTC)
+### L1.1 Live discovery (evidence)
 
-Required: live catalog rows, price snapshot, token calibration, episode_count.json (1,812/model), worst-case projection ≤ $18.50, frozen roster/provider/prompts/tools/budget/population/schedule/retry/estimand/all-false claims, prereg commit SHA + timing proof (first scientific request after), full L1 tests green; else STOP. **WorkPlan-follows.**
+- Catalog: 430 live models; 134 in the 6 candidate families; shortlist of 13 tool-capable slugs recorded with prices, context, tool flags (`model_candidates.json`).
+- Provider endpoints queried per roster slug: GLM 4.7 Flash → Venice (99.80% uptime, exact catalog price); Qwen 3.7 Flash → Alibaba (100%, sole endpoint); DeepSeek V4 Flash → Baidu (99.97%, exact catalog price). Rule frozen in advance: status-0 at exact catalog price with maximum 30m uptime. Novita (down, -5) excluded by the rule.
+- Price snapshot frozen with timestamp and source hash (`openrouter_price_snapshot.json`).
 
-_Status: BLOCKED (no key; see §L0.5)._
+### L1.2 Calibration, 48/48 episodes (evidence, infrastructure only)
+
+- 3 models × 16 episodes (4 tasks × 4 freezes × 1 repeat), all transport-clean (189 responses, 0 transport failures, 0 unparsable tool calls, provider IDs match slugs).
+- Token/turn maxima: input p95 7,299, output+reasoning p95 1,516, turns p95/max 8 (at the provisional cap → scientific cap raised to 12).
+- Total calibration spend $0.014074 over 168 requests (budget $0.50). No success metric was computed or inspected for any selection decision.
+- console.log: scripts/llm1_calibrate.py CAL-01..14 + CAL-11b (resume skips) + CAL-10b/10c (resume set, spend reconciliation); every print preceded by its comment.
+
+### L1.3 Locked artifacts (evidence)
+
+- Roster: z-ai/glm-4.7-flash, qwen/qwen3.7-flash, deepseek/deepseek-v4-flash (temperature 0, no reasoning overrides, tool_choice auto, no parallel tools); 4th model explicitly rejected (3-model full-population design preferred).
+- Provider lock: Venice/Alibaba/Baidu, allow_fallbacks false, require_parameters true; mid-run unavailability marks incomplete, never substitutes.
+- Budget: common envelope input 10,000 / output+reasoning 2,000 / turns 12 / 512 per turn (ceil 1.25× max-model p95, rounded up); worst-case $7.10304 (2.5368 + 1.01472 + 3.55152) ≤ $18.50, no cache savings assumed.
+- Episode count 1,812/model (F16 verified actual 16); FULL same-population design, no subset.
+- Execution schedule: 5,436 hash-ordered entries (fixed seed rule, pairing preserved).
+- Retry policy (transport-only, linked, single-count), primary estimand (F000 vs F010 + ordered endpoints, promotion banned), 10 claim predicates all false, 14 nonclaims carried.
+- Account spend baseline $94.960695046 recorded for reconciliation; experiment ledger starts at zero.
+
+### L1.4 Gate status
+
+- L1 tests green (prep 7 + prereg 3 + audit scope intact); secret scans green incl. raw payloads; worktree verified clean except ignored secrets at commit; prereg commit SHA recorded below; first scientific request: none has occurred.
+- Deviations: resume-safe calibration rerun + indentation fix (infrastructure, committed before calls completed); scanner refinements (placeholders, self-skip, header-name vs value distinction); audit-test scope extensions for follow-on paths. No protocol/behavioral change after any observation; no success metric inspected pre-lock.
+
+**WorkPlan-follows: YES. Next: L2 scientific inference (5,436 episodes, ≈$7.10 worst-case) — requires explicit approval to spend.**
+_Status: COMPLETE (LLM1_PREREGISTERED). Commit llm1 preregistration (pending push, see log)._
 
 ## §L2 — Live inference (TO RUN)
 
