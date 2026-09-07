@@ -75,7 +75,7 @@ None from the brief's first-action order (§33 steps 1-15 complete; step 16+ blo
 
 ### L1.4 Gate status
 
-- L1 tests green (prep 7 + prereg 3 + audit scope intact); secret scans green incl. raw payloads; worktree verified clean except ignored secrets at commit; prereg commit SHA recorded below; first scientific request: none has occurred.
+- L1 tests green (prep 7 + prereg 3 + audit scope intact); secret scans green incl. raw payloads; worktree verified clean except ignored secrets at commit; preregistration commit SHA c6e56ab; first scientific request: none has occurred (no L2 calls made).
 - Deviations: resume-safe calibration rerun + indentation fix (infrastructure, committed before calls completed); scanner refinements (placeholders, self-skip, header-name vs value distinction); audit-test scope extensions for follow-on paths. No protocol/behavioral change after any observation; no success metric inspected pre-lock.
 
 **WorkPlan-follows: YES. Next: L2 scientific inference (5,436 episodes, ≈$7.10 worst-case) — requires explicit approval to spend.**
@@ -103,4 +103,4 @@ _Status: PENDING (blocked on L3)._
 
 | Date (UTC) | Commit | Gate | Remote |
 |---|---|---|---|
-| 2026-09-07 | `cb04525` L1 prep pushed `c3b87e2..cb04525 main->main`; `4491d33` scanner hardening pushed `650b23e..4491d33` | prep (no gate) | `origin/main` |
+| 2026-09-07 | `cb04525` L1 prep pushed `c3b87e2..cb04525 main->main`; `4491d33` scanner hardening pushed `650b23e..4491d33`; `c6e56ab` L1 LLM1_PREREGISTERED pushed `fa59b86..c6e56ab main->main` | LLM1_PREREGISTERED | `origin/main` |
