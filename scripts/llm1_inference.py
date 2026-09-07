@@ -7,6 +7,7 @@ import hashlib
 import json
 import sys
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -63,6 +64,10 @@ def post_chat(key: str, payload: dict) -> tuple[int, dict]:
     try:
         with urllib.request.urlopen(request, timeout=180) as response:
             return response.status, json.loads(response.read().decode("utf-8"))
+    except urllib.error.HTTPError as error:
+        # console.log INF-06a: HTTP error with code captured.
+        print("[llm1:inference] post_chat: HTTPError code=%s." % getattr(error, "code", "?"))
+        return 0, {"transport_error": "HTTPError", "http_code": getattr(error, "code", None)}
     except Exception as error:
         # console.log INF-06: transport failure recorded.
         print("[llm1:inference] post_chat: transport failure %s." % type(error).__name__)
@@ -314,6 +319,12 @@ def main() -> int:
     # console.log INF-15: roster and schedule loaded.
     print("[llm1:inference] main: schedule entries=%d." % len(schedule))
     raw_dir = repo_root / "llm1" / "raw"
+    lock_path = raw_dir / ".inference.lock"
+    if lock_path.exists():
+        # console.log INF-16a: concurrent run refused.
+        print("[llm1:inference] concurrent run suspected; refuse. Verify no orphans, then remove llm1/raw/.inference.lock with reason.")
+        return 6
+    lock_path.write_text("locked\n", encoding="utf-8")
     done: set[str] = set()
     ep_path = raw_dir / "episodes.jsonl"
     if ep_path.exists():
@@ -362,6 +373,9 @@ def main() -> int:
                 return 5
     # console.log INF-17: inference run complete.
     print("[llm1:inference] main: spend=%.6f." % spend_state["total"])
+    lock_path.unlink(missing_ok=True)
+    # console.log INF-17b: lock released on clean completion.
+    print("[llm1:inference] main: lock released.")
     return 0
 
 
