@@ -129,7 +129,21 @@ def main() -> int:
     tasks = calibration["calibration_set"]["airline"] + calibration["calibration_set"]["retail"]
     raw_dir = repo_root / "llm1" / "raw"
     raw_dir.mkdir(parents=True, exist_ok=True)
+    done: set[tuple[str, str, str]] = set()
+    episodes_path = raw_dir / "calibration_episodes.jsonl"
+    if episodes_path.exists():
+        for line in open(episodes_path, encoding="utf-8"):
+            row = json.loads(line)
+            done.add((row["model"], row["task_id"], row["cell"]))
+    # console.log CAL-10b: resume set loaded.
+    print("[llm1:calibrate] main: already complete episodes=%d." % len(done))
     spend = 0.0
+    ledger_path = raw_dir / "cost_ledger.jsonl"
+    if ledger_path.exists():
+        for line in open(ledger_path, encoding="utf-8"):
+            spend = float(json.loads(line).get("cumulative_calibration", spend))
+    # console.log CAL-10c: prior spend reconciled.
+    print("[llm1:calibrate] main: prior spend=%.6f." % spend)
     episodes = 0
     # console.log CAL-11: episode loop entry.
     print("[llm1:calibrate] main: tasks=%d models=%d." % (len(tasks), len(args.models)))
@@ -139,8 +153,12 @@ def main() -> int:
         raw_dir / "cost_ledger.jsonl", "a", encoding="utf-8"
     ) as ledger:
         for model in args.models:
-            for task_id in tasks:
-                for cell, frozen in MASKS.items():
+        for task_id in tasks:
+            for cell, frozen in MASKS.items():
+                if (model, task_id, cell) in done:
+                    # console.log CAL-11b: completed episode skipped for resume.
+                    print("[llm1:calibrate] episode: skipping completed %s %s %s." % (model, task_id, cell))
+                    continue
                     turn_count = 0
                     messages = [
                         {"role": "system", "content": protocol["system_prompt"]},
