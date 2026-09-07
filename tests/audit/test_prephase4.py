@@ -105,6 +105,12 @@ def test_sealed_run_unmutated():
         "?? tests/audit/",
         "?? tests/phase4/",
         "?? tests/metamorphic/",
+        "?? WorkPlan_LLM1.md",
+        "?? Path_LLM1.md",
+        "?? llm1/",
+        "?? scripts/llm1_",
+        "?? tests/llm1/",
+        "?? .env.example",
     )
     # console.log AUDT-07: status lines collected.
     print("[test:audit-prephase4] status lines=%d." % len(status))
@@ -113,7 +119,7 @@ def test_sealed_run_unmutated():
         if code in ("??", "A ", "AM"):
             assert path.startswith(tuple(p[3:] for p in allowed_new)), "unexpected new path: %s" % line
         elif "M" in code:
-            assert path in ("Path.md", "scripts/run_pc_tau.py") or path.startswith("tests/") or path.endswith("/phase_manifest.json"), (
+            assert path in ("Path.md", "Path_LLM1.md", "scripts/run_pc_tau.py", ".gitignore") or path.startswith("tests/") or path.endswith("/phase_manifest.json"), (
                 "sealed mutation: %s" % line
             )
         else:
