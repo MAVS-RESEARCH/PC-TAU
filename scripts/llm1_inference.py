@@ -32,6 +32,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run scientific inference.")
     parser.add_argument("--config", default="configs/experiment.yaml")
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--only-model", default=None)
     args = parser.parse_args()
     # console.log INF-03: arguments parsed.
     print("[llm1:inference] parse_args: limit=%d." % args.limit)
@@ -330,6 +331,10 @@ def main() -> int:
     print("[llm1:inference] main: done=%d spend=%.6f." % (len(done), spend_state["total"]))
     if args.limit:
         schedule = schedule[: args.limit]
+    if args.only_model:
+        schedule = [row for row in schedule if row["model"] == args.only_model]
+        # console.log INF-15b: worker slice selected.
+        print("[llm1:inference] main: worker slice model=%s entries=%d." % (args.only_model, len(schedule)))
     with open(raw_dir / "api_requests.jsonl", "a", encoding="utf-8") as req_log, open(
         raw_dir / "api_responses.jsonl", "a", encoding="utf-8"
     ) as res_log, open(raw_dir / "episodes.jsonl", "a", encoding="utf-8") as ep_log, open(
