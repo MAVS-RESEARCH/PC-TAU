@@ -140,3 +140,4 @@ _Status: PENDING (blocked on L3)._
 | Date (UTC) | Commit | Gate | Remote |
 |---|---|---|---|
 | 2026-09-07 | `cb04525` L1 prep pushed `c3b87e2..cb04525 main->main`; `4491d33` scanner hardening pushed `650b23e..4491d33`; `c6e56ab` L1 LLM1_PREREGISTERED pushed `fa59b86..c6e56ab main->main` | LLM1_PREREGISTERED | `origin/main` |
+| 2026-09-08 | `d8ca436` L2+L3 pushed `305645e..d8ca436 main->main` (LIVE_INFERENCE_COMPLETE + LIVE_MEASURED: 5,436 live episodes, 8 metrics) | LIVE_MEASURED | `origin/main` |
