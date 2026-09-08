@@ -172,4 +172,4 @@ _Status: COMPLETE (LLM1_PREREGISTERED). Commit llm1 preregistration (pending pus
 |---|---|---|---|
 | 2026-09-07 | `cb04525` L1 prep pushed `c3b87e2..cb04525 main->main`; `4491d33` scanner hardening pushed `650b23e..4491d33`; `c6e56ab` L1 LLM1_PREREGISTERED pushed `fa59b86..c6e56ab main->main` | LLM1_PREREGISTERED | `origin/main` |
 | 2026-09-08 | `d8ca436` L2+L3 pushed `305645e..d8ca436 main->main` (LIVE_INFERENCE_COMPLETE + LIVE_MEASURED: 5,436 live episodes, 8 metrics) | LIVE_MEASURED | `origin/main` |
-| 2026-09-08 | L4 LLM1_SEALED (pending push) | LLM1_SEALED | `origin/main` |
+| 2026-09-08 | `4c3994d` L4 LLM1_SEALED pushed `1798a7a..4c3994d main->main` | LLM1_SEALED | `origin/main` |
