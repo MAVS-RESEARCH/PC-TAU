@@ -129,11 +129,42 @@ _Status: COMPLETE (LLM1_PREREGISTERED). Commit llm1 preregistration (pending pus
 
 **WorkPlan-follows: YES. Next: L4 independent audit and seal.**
 
-## §L4 — Audit + seal (TO RUN)
+## §L4 — Independent audit, falsification, claims, seal — COMPLETE (LLM1_SEALED, 2026-09-08 UTC)
 
-Required: 20-item independent rebuild, A-X corruptions fail-closed, reconciled cost ≤ $20, clean secret scans, deterministic replay, evidence-only claims, complete graph/bundle/LLM1_SEALED with reasons []; else INVALID. **WorkPlan-follows.**
+### L4.1 Independent rebuild (evidence)
 
-_Status: PENDING (blocked on L3)._
+- 12/12 layers equal: inheritance (parent hashes re-verified), roster_budget (1,812 math + $7.10 worst-case recomputed), schedule (5,436 unique keys), metrics (5,436/5,436 recomputed equal via independent arithmetic), costs ($1.070047 ≤ $20.00 reconciled), provenance (unique keys + response IDs), population (151 expected tasks, subset rule), provider_lock (roster slugs match trajectories, fallbacks false, providers recorded), frozen_hashes (6 protocol files byte-identical to L1), token_caps (per-episode cumulative accounting, no breach), pairing (1,359 quartets), terminals (every episode terminally classified).
+- Two audit-code defects caught by the audit itself and fixed in audit code only (never production): H-map divergence (none here — contract layer N/A), optimal_route None-vs-False on unresolved episodes, cumulative-vs-final-turn cap accounting. Science untouched.
+- console.log: src/llm1_audit 15 (inherit LAU-01..07, metrics LAU2-01..03, claims LCA-01..05), scripts/llm1_audit.py 14 (LAU3-01..12 + LAU3-14; LAU3-10b extended layers), every print preceded by its comment.
+
+### L4.2 Corruption battery A-X (evidence, 24/24 fail closed)
+
+- Scripted-swap, mock-without-ID, duplicate IDs, duplicate keys, provider/slug/freeze/call/result mutations, deleted failures and budget stops, E/R/A and K_Pi label leaks, contract/population/schedule changes, unevidenced flips (empty evidence flips nothing), cost tampering, overspend block, .env/header in bundle, silent fallback, price drift, retry-ledger edits — all detected.
+- console.log: scripts/llm1_corrupt.py LCOR-01..09.
+
+### L4.3 Claims (evidence, 10/10 true on pointers, language cross-checked)
+
+- True: actual_learned_agent_evidence (5,436 provider-verified trajectories), real_inference_complete (schedule exhausted), paired_resource_intervention_measured (quartets), freeze_sensitive_behavior_observed + finite_fallback_discovery + imperfect_adaptation + cross_model_replication + cross_model_heterogeneity (paired F000/F010 contrasts), unsafe_behavior_observed (262 blocked, zero executed), protocol_compatibility_established (3/3 models, zero incompatibilities).
+- LLM1_CLAIMS.md byte-equals the independent rebuild; no prevalence/frontier/universality language; parent SG-B standing unchanged (construction, not native).
+- console.log: src/pc_tau/llm1_claims.py LCL-01..06.
+
+### L4.4 Seal (evidence)
+
+- Graph 51 artifacts; manifest 14 entries; deterministic bundle `pc-tau-pctau-20260906-672227c-llm1-sealed.tar.zst` sha 54d6217e… (fixed point proven: two consecutive seals byte-identical after excluding bundle/pointer from their own content — the `.tar.zst` suffix trap documented in §L4.5); pointer `llm1/release_pointer.json`; REPRODUCE.md (replay vs replication split); post-seal mutation scan clean; marker LLM1_SEALED reasons [] with manifest digest assert.
+- console.log: scripts/llm1_seal.py LS-01..12.
+
+### L4.5 Deviations
+
+- Seal non-idempotence found and fixed (implementation, committed pre-seal): (i) bundle packed itself (`"bundle" in path.parts` never matches a filename; `Path.suffix` of `.tar.zst` is `.zst`), fixed with name-based exclusion of bundle + pointer from their own content; (ii) manifest_hash circularity, fixed with stable-key hashing. Provenance: probe scripts in temp dir only, never committed.
+- Response/request dedup quarantine (11,536 rows) after the L2 concurrency incident; episodes and ledger history preserved; costs recomputed post-quarantine.
+- Audit-test scope extensions for follow-on paths (documented in §A1 lineage). No protocol/behavioral change after any observation.
+
+### L4.6 Gate status + tests
+
+- L4 tests green (agreement, 24 corruptions, evidence-only claims, bundle tamper + seal, cost cap). Full suite 70 passed.
+- Status: LLM1_SEALED. The learned-agent leg the parent audit required is now measured, audited and sealed. Commit L4 seal (pending push, see log).
+
+**WorkPlan-follows: YES. The follow-on is complete: LLM1_PREREGISTERED → LIVE_INFERENCE_COMPLETE → LIVE_MEASURED → LLM1_SEALED.**
 
 ## Commit/push log
 
@@ -141,3 +172,4 @@ _Status: PENDING (blocked on L3)._
 |---|---|---|---|
 | 2026-09-07 | `cb04525` L1 prep pushed `c3b87e2..cb04525 main->main`; `4491d33` scanner hardening pushed `650b23e..4491d33`; `c6e56ab` L1 LLM1_PREREGISTERED pushed `fa59b86..c6e56ab main->main` | LLM1_PREREGISTERED | `origin/main` |
 | 2026-09-08 | `d8ca436` L2+L3 pushed `305645e..d8ca436 main->main` (LIVE_INFERENCE_COMPLETE + LIVE_MEASURED: 5,436 live episodes, 8 metrics) | LIVE_MEASURED | `origin/main` |
+| 2026-09-08 | L4 LLM1_SEALED (pending push) | LLM1_SEALED | `origin/main` |

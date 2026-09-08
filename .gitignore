@@ -12,3 +12,4 @@ results/*/agents/
 results/*/controls/
 results/*/audit/
 releases/*.tar.zst
+llm1/*.tar.zst

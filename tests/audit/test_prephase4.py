@@ -100,6 +100,8 @@ def test_sealed_run_unmutated():
         "?? scripts/run_audit.py",
         "?? src/pc_tau/claims.py",
         "?? src/pc_tau_audit/",
+        "?? src/llm1_audit/",
+        "?? src/pc_tau/llm1_claims.py",
         "?? schemas/audit.schema.json",
         "?? schemas/claim_ledger.schema.json",
         "?? tests/audit/",
@@ -124,7 +126,7 @@ def test_sealed_run_unmutated():
         if code in ("??", "A ", "AM"):
             assert path.startswith(tuple(p[3:] for p in allowed_new)), "unexpected new path: %s" % line
         elif "M" in code:
-            assert path in ("Path.md", "Path_LLM1.md", "scripts/run_pc_tau.py", ".gitignore") or path.startswith("tests/") or path.endswith("/phase_manifest.json"), (
+            assert path in ("Path.md", "Path_LLM1.md", "scripts/run_pc_tau.py", ".gitignore") or path.startswith("tests/") or path.startswith("llm1/") or path.endswith("/phase_manifest.json"), (
                 "sealed mutation: %s" % line
             )
         else:
