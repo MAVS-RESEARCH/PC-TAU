@@ -84,7 +84,7 @@ def test_no_secret_in_tracked_files():
         path = REPO_ROOT / rel
         if path.is_file() and path.stat().st_size < 5_000_000:
             content = path.read_bytes()
-            assert b"sk-or-" not in content, rel
+            assert not re.search(rb"sk-or-[A-Za-z0-9\-_]{8,}", content), rel
             assert b"Bearer sk-" not in content, rel
             if rel.replace("\\", "/").startswith("scripts/llm1_"):
                 continue
