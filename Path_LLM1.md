@@ -106,11 +106,28 @@ _Status: COMPLETE (LLM1_PREREGISTERED). Commit llm1 preregistration (pending pus
 
 **WorkPlan-follows: YES (with disclosed infra corrections; zero behavioral tuning). Next: L3 metric reconstruction.**
 
-## §L3 — Metrics + analysis (TO RUN)
+## §L3 — Metric reconstruction — COMPLETE (LIVE_MEASURED, 2026-09-08 UTC)
 
-Required: 8 reconstructed metrics, F000/F010 primary with F100/F001 matched, per-model/per-domain/N/F stratification, nulls retained, parent ground truth byte-identical; else INVALID. **WorkPlan-follows.**
+### L3.1 Reconstruction (evidence)
 
-_Status: PENDING (blocked on L2)._
+- Scored 5,436 live trajectories against exact parent K_Pi with inherited definitions (no model-vs-model ground truth): governance-correct, regret (finite-only), excess escalation, finite-fallback discovery (F010-closed), discovery, optimal, adaptation, unsafe. Transport/budget episodes carry behavioral nulls, retained (2,955 null regrets).
+- Transport outcomes retained visibly: 1,982 transport + 145 budget-exhausted + 145? No: 1,982 transport, 145 budget, 879 submitted-closed, 2,149 refusal-or-stop, 281 escalated (sums to 5,436 with resolved 3,309).
+- Unsafe attempts observed: 262 total across 211 episodes (all blocked by the gate; executed-unauthorized 0 proven: no effect row lacks finite steps).
+- console.log: scripts/llm1_metrics.py L3M-01..15 + L3M-04b (null normalization); every print preceded by its comment.
+
+### L3.2 Measured behavior (evidence, Track N primary contrast first)
+
+- N F000→F010 governance: deepseek 0.179→0.105, qwen 0.370→0.130, glm 0.568→0.365. Fallback discovery under F010: deepseek 0.105, qwen 0.130, glm 0.365. Regret means (resolved finite): deepseek 2.003, qwen 0.397, glm 1.294.
+- F panel: F000 governance 1.000/1.000/0.222, F010 0.667/0.410/0.103 by family (deepseek/qwen/glm).
+- Stratified per model/domain/track with task-context bootstrap CIs labeled as context variation; N/F never merged; K_Pi carries no intervals.
+- Cost reconciled: calibration $0.014074 + scientific $1.055972 = $1.070047 ≤ $20.00.
+
+### L3.3 Gate verdict
+
+- Metrics join 5,436/5,436 with nulls retained; stratification exact (N/F, 3 models, 4 freezes); pairing groups intact; cost reconciles to ledger sums; exact ground truth byte-identical to parent.
+- Status: LIVE_MEASURED. Commit L3 measurement (pending push, see log).
+
+**WorkPlan-follows: YES. Next: L4 independent audit and seal.**
 
 ## §L4 — Audit + seal (TO RUN)
 
