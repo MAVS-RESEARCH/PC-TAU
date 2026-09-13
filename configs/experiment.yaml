@@ -1,0 +1,27 @@
+run_id: pctau-20260906-672227c
+upstream:
+  url: https://github.com/sierra-research/tau2-bench
+  commit_sha: 672227c6b6676edc20d57ea53b7000262aae77b9
+  dir: external_source/_upstream
+domains:
+  primary:
+    - airline
+    - retail
+  fallback:
+    - telecom
+splits:
+  pilot_source: train
+  note: train split is the development-only split for pilot selection
+pilot:
+  seed: 42
+  per_domain: 12
+  node_budget: 1000
+determinism:
+  python_hash_seed: 0
+  canonical_json: true
+  sort_keys: true
+phase_gates:
+  g1: PREREGISTERED or STOP
+  g2: CONTRACT_SEALED or STOP
+  g3: MEASURED
+  g4: SEALED or INVALID

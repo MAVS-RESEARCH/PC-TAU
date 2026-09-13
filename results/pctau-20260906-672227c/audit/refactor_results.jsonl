@@ -1,0 +1,1 @@
+{"checks":[{"detected":true,"name":"harmless-rename-invariant"},{"detected":true,"name":"reorder-invariant"},{"detected":true,"name":"metadata-change-invariant"},{"detected":true,"name":"boundary-change-routes-to-partial"},{"detected":true,"name":"no-forced-label"},{"detected":true,"name":"unlisted-perturbation-refused"}],"class":"frozen-only","passed":true}

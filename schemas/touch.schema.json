@@ -1,0 +1,1 @@
+{"$schema":"http://json-schema.org/draft-07/schema#","properties":{"post_state":{"type":"string"},"pre_state":{"type":"string"},"repair":{"type":"string"},"task_id":{"type":"string"},"touch":{"items":{"enum":["E","R","A"]},"type":"array"}},"required":["task_id","repair","pre_state","post_state","touch"],"title":"touch_record","type":"object"}

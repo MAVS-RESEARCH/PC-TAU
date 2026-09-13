@@ -1,0 +1,5 @@
+primary:
+  unit_intervention_cost: 1
+  note: Unit intervention cost is the primary estimand, one per repair step.
+secondary_native: null
+secondary_note: Native-cost contract allowed only if source provides defensible cost semantics before results. None found pre-results, so null.

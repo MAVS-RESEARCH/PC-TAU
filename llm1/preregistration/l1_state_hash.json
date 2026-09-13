@@ -1,0 +1,23 @@
+{
+  "files": {
+    "llm1\\configs\\live_models.yaml": "e40144b398cb7ff1",
+    "llm1\\preregistration\\calibration_protocol.json": "62b8477273ebcc8f",
+    "llm1\\preregistration\\claim_predicates.json": "9fcaeb140ba1b96a",
+    "llm1\\preregistration\\endpoint_snapshot.json": "46599ed3b6cd2f37",
+    "llm1\\preregistration\\episode_count.json": "0c2f44ee815261ce",
+    "llm1\\preregistration\\execution_schedule.json": "78a1da8d82e17f96",
+    "llm1\\preregistration\\full_run_cost_projection.json": "7db679c41fbbbbcc",
+    "llm1\\preregistration\\interaction_budget.json": "9215fc1ab07d0973",
+    "llm1\\preregistration\\l1_state.json": "a77f9f2fa3b4aaa1",
+    "llm1\\preregistration\\live_protocol.json": "36ca597ca7171ee8",
+    "llm1\\preregistration\\model_candidates.json": "3618288e8bc06252",
+    "llm1\\preregistration\\model_roster.json": "1e592ac4e2de62c1",
+    "llm1\\preregistration\\nonclaims.json": "3168123078ce5887",
+    "llm1\\preregistration\\openrouter_price_snapshot.json": "6e1262da3902e379",
+    "llm1\\preregistration\\population_rule.json": "38b87ab99019586b",
+    "llm1\\preregistration\\primary_estimand.json": "629ff664f5d5d0ea",
+    "llm1\\preregistration\\provider_lock.json": "80881da1c686273b",
+    "llm1\\preregistration\\retry_policy.json": "412ae37166eb7616",
+    "llm1\\preregistration\\token_calibration.json": "ee560c9676f06d2f"
+  }
+}

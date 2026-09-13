@@ -1,0 +1,15 @@
+# PC-TAU build artifacts (Phase 1). Manifests, markers, pointers and small gate evidence are tracked.
+# LLM1 secrets (local only; never tracked).
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.pytest_cache/
+external_source/_upstream/
+results/*/exact/
+results/*/agents/
+results/*/controls/
+results/*/audit/
+releases/*.tar.zst
+llm1/*.tar.zst

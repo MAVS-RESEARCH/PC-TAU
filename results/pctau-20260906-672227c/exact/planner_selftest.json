@@ -1,0 +1,1 @@
+{"cases":[{"expected_r_frozen":2,"expected_unrestricted":1,"graph":"template-finite"},{"expected_delta_r":0,"graph":"R-zero"},{"expected_r_frozen":"INF","graph":"R-structural"},{"expected_e_frozen":"INF","expected_r_frozen":"INF","graph":"complementary"}],"passed":true,"probe_unrestricted":1,"production_planner_only":true,"run_id":"pctau-20260906-672227c"}

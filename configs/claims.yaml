@@ -1,0 +1,12 @@
+predicates:
+  prevalence_claim_authorized: false
+  superiority_claim_authorized: false
+  deployment_safety_claim_authorized: false
+  natural_frequency_from_track_f: false
+  planner_expressiveness_claim_authorized: false
+  multiroute_existence_authorized: false
+  finite_substitution_authorized: false
+  imperfect_adaptation_authorized: false
+  controlled_regime_authorized: false
+  typing_invariance_authorized: false
+note: All predicates initialize false (Fix 13). Phase 4 flips a scientific predicate only on its machine-checkable evidence predicate. Permanent nonclaims remain false forever.

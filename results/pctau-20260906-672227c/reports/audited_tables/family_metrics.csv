@@ -1,0 +1,7 @@
+track,model,episodes,governance_correct_rate,excess_escalation_rate,unsafe_total
+F,family-a,192,1.0,0.0,0
+F,family-b,192,0.3125,0.6875,0
+F,family-c,192,0.3125,0.6875,0
+N,family-a,1620,1.0,0.0,0
+N,family-b,1620,0.75,0.25,0
+N,family-c,1620,0.75,0.25,0
